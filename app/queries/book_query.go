@@ -1,9 +1,9 @@
 package queries
 
 import (
+	"fiber/app/models"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"
-	"github.com/koddr/tutorial-go-fiber-rest-api/app/models"
 )
 
 // BookQueries struct for queries from Book model.
@@ -45,9 +45,9 @@ func (q *BookQueries) GetBook(id uuid.UUID) (models.Book, error) {
 }
 
 func (q *BookQueries) CreateBook(b *models.Book) error {
-	query := `INSERT INTO books VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
+	query := `INSERT INTO books VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
-	_, err := q.Exec(query, b.ID, b.CreatedAt, b.UpdatedAt, b.UserID, b.Title, b.Author, b.BookStatus, b.BookAttrs)
+	_, err := q.Exec(query, b.ID, b.CreatedAt, b.UpdatedAt, b.Title, b.Author, b.BookStatus, b.BookAttrs)
 
 	if err != nil {
 		// Return only error.
